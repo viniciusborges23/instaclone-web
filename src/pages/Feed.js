@@ -9,6 +9,8 @@ import like from "../assets/like.svg";
 import comment from "../assets/comment.svg";
 import send from "../assets/send.svg";
 
+const { REACT_APP_API_URL } = process.env;
+
 class Feed extends Component {
   state = {
     feed: []
@@ -23,7 +25,7 @@ class Feed extends Component {
   }
 
   registerToSocket = () => {
-    const socket = io("http://localhost:3000");
+    const socket = io(REACT_APP_API_URL);
 
     socket.on("post", newPost => {
       this.setState({ feed: [newPost, ...this.state.feed] });
@@ -56,7 +58,7 @@ class Feed extends Component {
               <img src={more} alt="Mais" />
             </header>
 
-            <img src={`http://localhost:3000/files/${post.image}`} alt="Mais" />
+            <img src={`${REACT_APP_API_URL}/files/${post.image}`} alt="Mais" />
 
             <footer>
               <div className="actions">
